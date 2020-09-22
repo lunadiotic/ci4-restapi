@@ -10,7 +10,7 @@ class Contact extends BaseController
     {
         $this->model = new ContactModel();   
     }
-    
+
 	public function index()
 	{
         $data = [
@@ -19,7 +19,17 @@ class Contact extends BaseController
         ];
 
         return $this->response->setStatusCode(200)->setJSON($data);
-	}
+    }
+    
+    public function show($id = null)
+    {
+        $data = [
+            'message' => 'success',
+            'data' => $this->model->find($id)
+        ];
+        
+        return $this->response->setStatusCode(200)->setJSON($data);
+    }
 
 	//--------------------------------------------------------------------
 
