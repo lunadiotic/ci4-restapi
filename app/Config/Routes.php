@@ -36,7 +36,7 @@ $routes->get('/', 'Home::index');
 
 // Equivalent to the following:
 // $routes->get('photos/new',             'Photos::new');
-// $routes->post('photos',                'Photos::create');
+$routes->post('contacts',                'Contact::create');
 $routes->get('contacts',                 'Contact::index');
 $routes->get('contacts/(:segment)',      'Contact::show/$1');
 // $routes->get('photos/(:segment)/edit', 'Photos::edit/$1');

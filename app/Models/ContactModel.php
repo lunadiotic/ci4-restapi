@@ -18,7 +18,7 @@ class ContactModel extends Model
         'name'        => [
             'required' => 'Maaf. Nama harus di isi'
         ],
-        'numeric' => [
+        'number' => [
             'max_length' => 'Waduh, bro! Kebanyakan!'
         ]
     ];
