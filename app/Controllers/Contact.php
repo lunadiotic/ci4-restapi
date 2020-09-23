@@ -95,5 +95,43 @@ class Contact extends ResourceController
         ];
         return $this->respond($response, 404);
     }
+
+    public function delete($id = null)
+    {
+        if ($this->model->find($id)) {
+
+            $delete = $this->model->delete($id);
+    
+            if ($delete) {
+                $response = [
+                    'message' => 'success',
+                ];
+                return $this->respond($response, 200);
+            } 
+
+            try {
+                $this->model->delete($id);
+                $response = [
+                    'message' => 'success',
+                ];
+                return $this->respond($response, 200);
+            } catch (\Exception $e) {
+                $response = [
+                    'message' => 'fail',
+                    'errors' => $e->getMessage()
+                ];
+                return $this->respond($response, 422);
+            }
+            
+        }
+
+        $response = [
+            'message' => 'fail',
+            'errors' => [
+                'message' => 'data not found'
+            ]
+        ];
+        return $this->respond($response, 404);
+    }
     
 }

@@ -42,7 +42,7 @@ $routes->get('contacts/(:segment)',      'Contact::show/$1');
 // $routes->get('photos/(:segment)/edit', 'Photos::edit/$1');
 $routes->put('contacts/(:segment)',      'Contact::update/$1');
 // $routes->patch('photos/(:segment)',    'Photos::update/$1');
-// $routes->delete('photos/(:segment)',   'Photos::delete/$1');
+$routes->delete('contacts/(:segment)',   'Contact::delete/$1');
 
 /**
  * --------------------------------------------------------------------
