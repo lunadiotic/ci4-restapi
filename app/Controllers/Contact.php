@@ -37,7 +37,6 @@ class Contact extends ResourceController
 
     public function create()
     {
-
         $input = $this->validate(
             $this->model->getValidationRules(), 
             $this->model->getValidationMessages()
@@ -56,6 +55,45 @@ class Contact extends ResourceController
             ];
             return $this->respond($response, 422);
         }
+    }
+
+    public function update($id = null)
+    {
+        if ($this->model->find($id)) {
+
+            $this->model->setValidationRule(
+                'number', 
+                "required|numeric|max_length[15]|is_unique[contacts.number,id,{$id}]"
+            );
+
+            $input = $this->validate(
+                $this->model->getValidationRules(), 
+                $this->model->getValidationMessages()
+            );
+    
+            if ($input) {
+                $this->model->update($id, $this->request->getRawInput());
+
+                $response = [
+                    'message' => 'success',
+                ];
+                return $this->respond($response, 200);
+            } 
+
+            $response = [
+                'message' => 'fail',
+                'errors' => $this->validator->getErrors()
+            ];
+            return $this->respond($response, 422);
+        }
+
+        $response = [
+            'message' => 'fail',
+            'errors' => [
+                'message' => 'data not found'
+            ]
+        ];
+        return $this->respond($response, 404);
     }
     
 }

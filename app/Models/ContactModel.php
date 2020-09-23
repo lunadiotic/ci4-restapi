@@ -11,7 +11,7 @@ class ContactModel extends Model
 
     protected $validationRules = [
         'name' => 'required',
-        'number' => 'required|numeric|max_length[15]'
+        'number' => 'required|numeric|max_length[15]|is_unique[contacts.number]'
     ];
 
     protected $validationMessages = [
@@ -19,7 +19,8 @@ class ContactModel extends Model
             'required' => 'Maaf. Nama harus di isi'
         ],
         'number' => [
-            'max_length' => 'Waduh, bro! Kebanyakan!'
+            'max_length' => 'Waduh, bro! Kebanyakan!',
+            'is_unique' => 'Nomor yang kamu simpan sudah ada!'
         ]
     ];
 }
